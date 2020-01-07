@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"log"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -18,10 +18,16 @@ func _main(args []string) error {
 		qchar              string
 	}
 	fs := flag.NewFlagSet("prettylist", flag.ContinueOnError)
+	fs.SetOutput(ioutil.Discard)
 	fs.IntVar(&f.linLen, "maxlen", 80, "sets the maximum line length")
 	fs.StringVar(&f.qchar, "quote", "", "defines a surrounding quote character for each item")
 	fs.IntVar(&f.nleadspace, "nspaces", 0, "set the number of space characters each line should have prepended")
 	if err := fs.Parse(args[1:]); err != nil {
+		if err == flag.ErrHelp {
+			fs.SetOutput(os.Stderr)
+			fs.Usage()
+			return err
+		}
 		return errors.Wrap(err, "failed to parse arguments")
 	}
 	if f.nleadspace >= f.linLen {
@@ -56,7 +62,9 @@ func _main(args []string) error {
 
 func main() {
 	if err := _main(os.Args); err != nil {
-		log.Printf("%s: error: %s", filepath.Base(os.Args[0]), err)
+		if err != flag.ErrHelp {
+			fmt.Fprintf(os.Stderr, "%s: error: %s\n", filepath.Base(os.Args[0]), err)
+		}
 		os.Exit(1)
 	}
 }
