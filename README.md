@@ -7,7 +7,7 @@ a tiny unix pipe utitlity that reads in newline delimited items and organizes th
 requires Golang
 
 ```
-$ go install -u -v github.com/nkcmr/prettylist
+$ go install -u -v github.com/nkcmr/prettylist@latest
 ```
 
 ## usage
@@ -19,7 +19,7 @@ $ cat data.csv | \
 	q 'select id_column from - where thing = "foo"' | \
 	xsv sample 10 | \
 	tail -n+2 | \
-	prettylist -quote "'" -maxlen 120 -nspaces 4
+	prettylist --singlequote --maxlen 120 --nspaces 4
 ```
 
 (`q` is https://github.com/harelba/q, `xsv` is https://github.com/BurntSushi/xsv)
@@ -38,7 +38,7 @@ ready to be pasted into an `IN (...)` for a query!
 
 ## license
 
-Copyright 2020 Nicholas Comer
+Copyright 2020-2022 Nicholas Comer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
