@@ -7,7 +7,7 @@ a tiny unix pipe utitlity that reads in newline delimited items and organizes th
 requires Golang
 
 ```
-$ go install -u -v github.com/nkcmr/prettylist@latest
+$ go install -v code.nkcmr.net/prettylist@latest
 ```
 
 ## usage

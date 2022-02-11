@@ -1,4 +1,4 @@
-package main
+package main // import "code.nkcmr.net/prettylist"
 
 import (
 	"bufio"

@@ -1,4 +1,4 @@
-module github.com/nkcmr/prettylist
+module code.nkcmr.net/prettylist
 
 go 1.15
 
